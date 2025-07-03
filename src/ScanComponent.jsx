@@ -1,51 +1,57 @@
 import React, { useState, useEffect } from "react";
-import { database, ref, set } from "./firebase";
+import api from "./api";
 
 function ScanComponent() {
   const [name, setName] = useState("");
-  const [vip, setVip] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     if (e) e.preventDefault();
+    if (!name) return;
 
-    const dataRef = ref(database, "/");
-
-    set(dataRef, { name, vip })
-      .then(() => {
-        console.log("Data submitted:", { name, vip });
-        // ✅ Clear the form after successful submission
-        setName("");
-        setVip(false);
-      })
-      .catch((err) => {
-        console.error("Coba ulang", err);
+    setStatus("loading");
+    try {
+      const res = await api.post("/guests/attend", {
+        invitation_id: name,
       });
+
+      console.log("✅ Attendance submitted:", res.data);
+      setMessage(`✅ ${res.data.data.guest_name || "Tamu"} telah hadir`);
+      setStatus("success");
+
+      // Clear input
+      setName("");
+    } catch (err) {
+      console.error("❌ Gagal mengirim:", err);
+      setMessage("❌ Gagal kirim atau ID tidak ditemukan");
+      setStatus("error");
+    }
   };
 
-  // 🧠 Auto-submit when name reaches 6 characters
+  // Auto-submit saat input panjangnya 6 karakter
   useEffect(() => {
     if (name.length === 6) {
       handleSubmit();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [name]); // Only rerun when `name` changes
-
-  const toggleVip = () => {
-    setVip((prev) => !prev);
-  };
+  }, [name]);
 
   return (
     <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
-      <h2>Update Guest Info</h2>
+      <h2>Scan Guest Invitation ID</h2>
       <input
         type="text"
         placeholder="Enter ID"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => setName(e.target.value.toUpperCase())}
         required
         style={{ padding: "8px", fontSize: "16px", marginRight: "10px" }}
       />
-      <button type="submit">Update Firebase</button>
+      <button type="submit">Kirim Kehadiran</button>
+      {status === "loading" && <p>⏳ Mengirim...</p>}
+      {status === "success" && <p style={{ color: "green" }}>{message}</p>}
+      {status === "error" && <p style={{ color: "red" }}>{message}</p>}
     </form>
   );
 }

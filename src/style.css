@@ -335,3 +335,36 @@ body {
   left: 0;
   top: 0;
 }
+
+.popup-alert {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  background-color: #ffffffdd;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  font-size: 1.2rem;
+  color: #2c3e50;
+  z-index: 9999;
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.title-group {
+  font-size: 1.5rem;
+  color: #666;
+  margin-top: -10px;
+  font-style: italic;
+}

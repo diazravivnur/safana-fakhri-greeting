@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { database, ref, onValue } from "./firebase";
+import { ref, onValue } from "firebase/database";
+import { database } from "./firebase";
 import "./style.css";
 import "animate.css";
 import "yet-another-react-lightbox/styles.css";
@@ -116,22 +117,43 @@ function HomeComponent() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const dataRef = ref(database, "/");
-    onValue(
-      dataRef,
-      (snapshot) => {
-        const fetched = snapshot.val();
-        if (fetched) {
-          setData({ name: fetched.name, vip: fetched.vip });
-        } else {
-          setData({ name: "Unknown", vip: false });
-        }
-      },
-      {
-        onlyOnce: false,
+    const attendanceRef = ref(database, "attendance");
+
+    onValue(attendanceRef, (snapshot) => {
+      const attendanceData = snapshot.val();
+      if (!attendanceData) return;
+
+      // Ambil data paling terakhir diubah
+      const latestKey = Object.keys(attendanceData).sort(
+        (a, b) =>
+          new Date(attendanceData[b].updatedAt) -
+          new Date(attendanceData[a].updatedAt)
+      )[0];
+      const latest = attendanceData[latestKey];
+
+      if (latest) {
+        setData({
+          name: latest.guest_name || "Tamu",
+          groupName: latest.group_name || "-",
+          vip: latest.origin === "vip" || false,
+        });
+
+        // Optional: Show popup or visual effect
+        // const audio = new Audio("/sound/notification.mp3");
+        // audio.play();
+
+        // Optional visual cue
+        const popup = document.createElement("div");
+        popup.innerText = `🎉 ${latest.guest_name} telah hadir!`;
+        popup.className = "popup-alert";
+        document.body.appendChild(popup);
+        setTimeout(() => popup.remove(), 5000);
       }
-    );
-    return () => {};
+    });
+
+    return () => {
+      // You can clean up the listener here if needed
+    };
   }, []);
 
   if (data === null) {
@@ -261,6 +283,9 @@ function HomeComponent() {
         </h1>
         <h1 className="title-guest animate__animated animate__fadeInUp animate__delay-0.5s">
           {data.name}
+        </h1>
+        <h1 className="title-group animate__animated animate__fadeInUp animate__delay-0.5s">
+          {data.groupName}
         </h1>
 
         <h1 className="title-by animate__animated animate__fadeInUp animate__delay-0.5s">
