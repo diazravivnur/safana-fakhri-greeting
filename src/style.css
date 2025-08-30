@@ -73,7 +73,7 @@ body {
 .img_logo {
   position: absolute;
   z-index: 1000;
-  width: 90åpx;
+  width: 70px;
   height: fit-content;
   top: 8%;
   transform: translateX(-50%);
@@ -249,12 +249,12 @@ body {
   font-family: "Cormorant Garamond", serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 80px;
+  font-size: 60px;
   text-align: center;
   z-index: 1000;
   margin-left: 30px;
   margin-right: 30px;
-  top: 43%;
+  top: 53%;
   color: white;
 }
 .title-welcome {
