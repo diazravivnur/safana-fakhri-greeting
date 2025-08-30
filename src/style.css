@@ -73,7 +73,7 @@ body {
 .img_logo {
   position: absolute;
   z-index: 1000;
-  width: 150px;
+  width: 120px;
   height: fit-content;
   top: 10%;
   transform: translateX(-50%);
