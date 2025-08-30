@@ -73,9 +73,9 @@ body {
 .img_logo {
   position: absolute;
   z-index: 1000;
-  width: 120px;
+  width: 90åpx;
   height: fit-content;
-  top: 10%;
+  top: 8%;
   transform: translateX(-50%);
 }
 /* Make lightbox container semi-dark with blur */
