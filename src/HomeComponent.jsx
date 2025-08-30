@@ -166,13 +166,6 @@ function HomeComponent() {
         className="img_logo animate__animated animate__fadeInUp animate__delay-0.5s"
       />
       <>
-        <h1 className="title-theweddingof-opened animate__animated animate__fadeInUp animate__delay-0.5s">
-          The Wedding of
-        </h1>
-        <h1 className="title-opened animate__animated animate__fadeInUp animate__delay-0.5s">
-          Safana & Fakhri
-        </h1>
-
         <h1 className="title-welcome animate__animated animate__fadeInUp animate__delay-0.5s">
           Welcome,
         </h1>
