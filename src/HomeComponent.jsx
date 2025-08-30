@@ -24,7 +24,7 @@ import padikapas_kanan from "./assets/padikapas_kanan.png";
 import merak from "./assets/merak.png";
 import kupu1 from "./assets/kupu1.png";
 import kupu2 from "./assets/kupu2.png";
-import logo from "./assets/Wulan_&_Diaz_logo.png";
+import logo from "./assets/logo.png";
 import wulandiazopened from "./assets/wulandiazopenedimage.png";
 import wulandiazopenedModal from "./assets/wulandiazopened.png";
 import bungaataskiri from "./assets/page_sixth/bungataskiri.png";
@@ -161,113 +161,10 @@ function HomeComponent() {
   return (
     <div className="app-container">
       <div className="top-background animate__animated animate__fadeInDown animate__slower" />
-
-      <MotionImage
-        className="bungataskiri_head"
-        src={bungaataskiri}
-        animationType="sway"
-      />
-      <MotionImage
-        className="bungaataskanan_head"
-        src={bungaataskanan}
-        animationType="sway"
-      />
-
-      <img
-        src={gate}
-        className="img_gate animate__animated animate__fadeInUp animate__delay-0.5s"
-      />
-      <img src={montain} className="img_mountain" />
-      <motion.img
-        className="img_janur"
-        animate={{ rotate: [0, 1.5, 0, -1.5, 0] }}
-        transition={{ duration: 6, repeat: Infinity }}
-        src={janur}
-      />
       <img
         src={logo}
         className="img_logo animate__animated animate__fadeInUp animate__delay-0.5s"
       />
-      {/* left flowers */}
-      <div className="bunga_kiri">
-        <motion.img
-          src={bunga1}
-          className="img_bunga1"
-          animate={{ rotate: [0, 1.5, 0, -1.5, 0] }}
-          transition={{ duration: 6, repeat: Infinity }}
-        />
-        <motion.img
-          src={bunga2}
-          className="img_bunga2"
-          animate={{ rotate: [0, 2, 0, -2, 0] }}
-          transition={{ duration: 7, repeat: Infinity }}
-        />
-        <motion.img
-          src={bunga3}
-          className="img_bunga3"
-          animate={{ rotate: [0, 1, 0, -1, 0] }}
-          transition={{ duration: 5, repeat: Infinity }}
-        />
-        <motion.img
-          src={bunga4}
-          className="img_bunga4"
-          animate={{ rotate: [0, 1.5, 0, -1.5, 0] }}
-          transition={{ duration: 6, repeat: Infinity }}
-        />
-      </div>
-      {/* right flowers */}
-      <div className="bunga_kanan">
-        <motion.img
-          src={bungapink_kanan}
-          className="img_bungapink_kanan"
-          animate={{ rotate: [0, -1.5, 0, 1.5, 0] }}
-          transition={{ duration: 6, repeat: Infinity }}
-        />
-        <motion.img
-          src={pohonijo_kanan}
-          className="img_pohonijo_kanan"
-          animate={{ rotate: [0, 2, 0, -2, 0] }}
-          transition={{ duration: 7, repeat: Infinity }}
-        />
-        <motion.img
-          src={padikapas_kanan}
-          className="img_padikapas_kanan"
-          animate={{ rotate: [0, 1, 0, -1, 0] }}
-          transition={{ duration: 5, repeat: Infinity }}
-        />
-        <motion.img
-          src={tanaman_kanan}
-          className="img_tanaman_kanan"
-          animate={{ rotate: [0, 1.5, 0, -1.5, 0] }}
-          transition={{ duration: 6, repeat: Infinity }}
-        />
-        <motion.img
-          src={bungabawah_kanan}
-          className="img_bungabawah_kanan"
-          animate={{ rotate: [0, 1, 0, -1, 0] }}
-          transition={{ duration: 6, repeat: Infinity }}
-        />
-      </div>
-      {/* animals */}
-      <div className="binatang">
-        <MotionImage
-          src={kupu1}
-          initial={{ y: -50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          animationType="fly"
-          transition={{ duration: 1.2 }}
-          className="img_kupu1"
-        />
-        <MotionImage
-          src={kupu2}
-          initial={{ y: -50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          animationType="fly"
-          transition={{ duration: 1.2 }}
-          className="img_kupu2"
-        />
-      </div>
-
       <>
         <h1 className="title-theweddingof-opened animate__animated animate__fadeInUp animate__delay-0.5s">
           The Wedding of
