@@ -1,21 +1,21 @@
-// firebase.js
-import { initializeApp, getApps } from "firebase/app";
-import { getDatabase } from "firebase/database";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database"; // <-- Add this
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAWJUXATGLKuLzGxvL9tZlRFIc0yRIZkms",
-  authDomain: "guest-book-wulandiaz.firebaseapp.com",
+  apiKey: "AIzaSyDgCHpaU7jW2Dml-cbePxjWyS1S5t8_qHw",
+  authDomain: "guest-book-safana-fakhri.firebaseapp.com",
   databaseURL:
-    "https://guest-book-wulandiaz-default-rtdb.asia-southeast1.firebasedatabase.app", // ✅ tambahkan ini
-  projectId: "guest-book-wulandiaz",
-  storageBucket: "guest-book-wulandiaz.appspot.com",
-  messagingSenderId: "568362231163",
-  appId: "1:568362231163:web:e8e402bceaef0d81d249de",
-  measurementId: "G-QGJRZXDTSL",
+    "https://guest-book-safana-fakhri-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "guest-book-safana-fakhri",
+  storageBucket: "guest-book-safana-fakhri.firebasestorage.app",
+  messagingSenderId: "533998231055",
+  appId: "1:533998231055:web:07dead6eb632e439cf0d7a",
+  measurementId: "G-XNLN93SCG3",
 };
 
-const app =
-  getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-const database = getDatabase(app);
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const database = getDatabase(app); // <-- Add this
 
-export { database };
+export { app, analytics, database }; // <-- Add this

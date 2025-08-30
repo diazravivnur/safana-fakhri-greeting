@@ -118,42 +118,40 @@ function HomeComponent() {
 
   useEffect(() => {
     const attendanceRef = ref(database, "attendance");
-
-    onValue(attendanceRef, (snapshot) => {
+    const unsubscribe = onValue(attendanceRef, (snapshot) => {
       const attendanceData = snapshot.val();
-      if (!attendanceData) return;
+      console.log(123, attendanceData);
 
-      // Ambil data paling terakhir diubah
-      const latestKey = Object.keys(attendanceData).sort(
-        (a, b) =>
-          new Date(attendanceData[b].updatedAt) -
-          new Date(attendanceData[a].updatedAt)
-      )[0];
+      if (!attendanceData) {
+        setData({
+          name: "Tamu",
+          groupName: "-",
+          vip: false,
+        });
+        return;
+      }
+
+      // Ambil key terakhir (misalnya SF-472)
+      const keys = Object.keys(attendanceData);
+      console.log(222, keys);
+      const latestKey = keys[keys.length - 1];
       const latest = attendanceData[latestKey];
 
-      if (latest) {
-        setData({
-          name: latest.guest_name || "Tamu",
-          groupName: latest.group_name || "-",
-          vip: latest.origin === "vip" || false,
-        });
+      setData({
+        name: latest.guest_name || "Tamu",
+        groupName: latest.group_name || "-",
+        vip: latest.origin === "vip" || false,
+      });
 
-        // Optional: Show popup or visual effect
-        // const audio = new Audio("/sound/notification.mp3");
-        // audio.play();
-
-        // Optional visual cue
-        const popup = document.createElement("div");
-        popup.innerText = `🎉 ${latest.guest_name} telah hadir!`;
-        popup.className = "popup-alert";
-        document.body.appendChild(popup);
-        setTimeout(() => popup.remove(), 5000);
-      }
+      // Optional popup
+      const popup = document.createElement("div");
+      popup.innerText = `🎉 ${latest.guest_name || "Tamu"} telah hadir!`;
+      popup.className = "popup-alert";
+      document.body.appendChild(popup);
+      setTimeout(() => popup.remove(), 5000);
     });
 
-    return () => {
-      // You can clean up the listener here if needed
-    };
+    return () => unsubscribe();
   }, []);
 
   if (data === null) {
@@ -275,7 +273,7 @@ function HomeComponent() {
           The Wedding of
         </h1>
         <h1 className="title-opened animate__animated animate__fadeInUp animate__delay-0.5s">
-          Wulan & Diaz
+          Safana & Fakhri
         </h1>
 
         <h1 className="title-welcome animate__animated animate__fadeInUp animate__delay-0.5s">
